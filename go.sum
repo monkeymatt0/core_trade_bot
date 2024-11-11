@@ -1,0 +1,6 @@
+github.com/markcheno/go-talib v0.0.0-20190307022042-cd53a9264d70 h1:+iG37/Aw61Oc+ZJ4DSxQF2+K0e4ZiMidI7ytWuW4/cI=
+github.com/markcheno/go-talib v0.0.0-20190307022042-cd53a9264d70/go.mod h1:xsYvOKWtDWoDV0kdN3U8tYZ4lVrhjqf64cJRzR4ScTI=
+github.com/monkeymatt0/binance_url_builder v1.0.1-beta h1:fEz6xmi58pjrLjgwZBNsmDvRstZmBakyJJY21Dr+grE=
+github.com/monkeymatt0/binance_url_builder v1.0.1-beta/go.mod h1:12GHMMvmEi4qonRVq3Xq+k4V7a66+8D3XYk5/NKPH5o=
+github.com/monkeymatt0/binance_url_builder v1.0.3-beta h1:MYSYuilRaE1s6md9sWDsVe5cOBQYTs25pebcD8gueRQ=
+github.com/monkeymatt0/binance_url_builder v1.0.3-beta/go.mod h1:12GHMMvmEi4qonRVq3Xq+k4V7a66+8D3XYk5/NKPH5o=
