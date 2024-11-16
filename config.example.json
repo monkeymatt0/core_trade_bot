@@ -1,0 +1,10 @@
+{
+  "api_key": "YOUR_BINANCE_API_KEY",
+  "secret_key": "YOUR_BINANCE_SECRET",
+  "rsi_bottom_limit": "<Your_value>",
+  "rsi_top_limit": "<Your_value>",
+  "take_profit": "<Your_value>",
+  "stop_loss": "<Your_value>",
+  "stop_hours": "<Your_value>",
+  "valid_candle": "<Your_value>"
+}
