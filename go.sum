@@ -1,6 +1,10 @@
-github.com/markcheno/go-talib v0.0.0-20190307022042-cd53a9264d70 h1:+iG37/Aw61Oc+ZJ4DSxQF2+K0e4ZiMidI7ytWuW4/cI=
-github.com/markcheno/go-talib v0.0.0-20190307022042-cd53a9264d70/go.mod h1:xsYvOKWtDWoDV0kdN3U8tYZ4lVrhjqf64cJRzR4ScTI=
-github.com/monkeymatt0/binance_url_builder v1.0.1-beta h1:fEz6xmi58pjrLjgwZBNsmDvRstZmBakyJJY21Dr+grE=
-github.com/monkeymatt0/binance_url_builder v1.0.1-beta/go.mod h1:12GHMMvmEi4qonRVq3Xq+k4V7a66+8D3XYk5/NKPH5o=
-github.com/monkeymatt0/binance_url_builder v1.0.3-beta h1:MYSYuilRaE1s6md9sWDsVe5cOBQYTs25pebcD8gueRQ=
-github.com/monkeymatt0/binance_url_builder v1.0.3-beta/go.mod h1:12GHMMvmEi4qonRVq3Xq+k4V7a66+8D3XYk5/NKPH5o=
+github.com/monkeymatt0/binance_client v1.0.2-beta h1:SlYVNpyxLjnB5uWIEZz4YmEMsBsCkrQyu0tvYG+5hao=
+github.com/monkeymatt0/binance_client v1.0.2-beta/go.mod h1:/QCN9zglg7U9PumHDvxdiA5KossRpJuwp80rLihLi4s=
+github.com/monkeymatt0/binance_client v1.0.3-beta h1:YTrElV1qIsV2OXeg+EiKCS2UMBZHdYJu2P0cHZnpO10=
+github.com/monkeymatt0/binance_client v1.0.3-beta/go.mod h1:Liz9c6Cw+rRuoISxo+7Es1Pucox2NWXKXg2T2bOmPLU=
+github.com/monkeymatt0/binance_client v1.0.4-beta h1:mpUyc4goY3l1w9gpLRPo7KrIQMmxuEgWK1IZ+auqnG4=
+github.com/monkeymatt0/binance_client v1.0.4-beta/go.mod h1:m1/g7Tg8/4NEqxYEEBM+MWzTp7KQjlOzOAXKzD+NNjY=
+github.com/monkeymatt0/binance_url_builder v1.0.6-beta h1:PjONf6O8W14LXl04q0TTCgPfLGI7/X31/L9rQdRLQ4E=
+github.com/monkeymatt0/binance_url_builder v1.0.6-beta/go.mod h1:12GHMMvmEi4qonRVq3Xq+k4V7a66+8D3XYk5/NKPH5o=
+github.com/monkeymatt0/binance_url_builder v1.0.7-beta h1:7RHUpysTXdd2DqDkRYSzJ9y0EQnsToSPr2ne+iXjmZo=
+github.com/monkeymatt0/binance_url_builder v1.0.7-beta/go.mod h1:12GHMMvmEi4qonRVq3Xq+k4V7a66+8D3XYk5/NKPH5o=
