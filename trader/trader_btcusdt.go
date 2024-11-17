@@ -122,8 +122,8 @@ func (but *BtcUsdtTrader) monkeyTrigger(candlesticks []models.TACadlestick, bott
 		return false
 	}
 
-	// Check to see if the candle is below the 45 RSI
-	if candlesticks[0].RSI14 > 45 {
+	// Check to see if the candle is below the RSI bottom
+	if candlesticks[0].RSI14 > bottomLimit {
 		return false
 	}
 
