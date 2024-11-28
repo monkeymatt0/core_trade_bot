@@ -7,6 +7,7 @@ type Config struct {
 	RsiTopLimit    float64 `json:"rsi_top_limit"`
 	TakeProfit     float64 `json:"take_profit"`
 	StopLoss       float64 `json:"stop_loss"`
+	StopPriceLoss  float64 `json:"stop_price_loss"`
 	StopHours      uint8   `json:"stop_hours"`
-	ValidCandle    uint8   `json:"valid_candle"`
+	ValidCandle    uint64  `json:"valid_candle"`
 }
