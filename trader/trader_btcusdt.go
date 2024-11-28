@@ -16,7 +16,8 @@ type BtcUsdtTrader struct {
 	apiKey    string
 	secretKey string
 
-	usdt float64
+	usdt             float64
+	maxUsableCapital float64 // Maximum amount of USDT this trader can use
 
 	buyPrice    float64 // Price I bought
 	tpSellPrice float64 // Price I sell in profit
@@ -28,6 +29,8 @@ type BtcUsdtTrader struct {
 	stopLoss        float64 // optimal value 0.004
 	stopPriceLoss   float64 // optimal value 0.003
 	takeProfit      float64 // optimal value 0.025
+
+	lastThreeCandles []models.TACadlestick
 
 	bottomLimitRSI float64
 	topLimitRSI    float64
@@ -50,7 +53,7 @@ type BtcUsdtTrader struct {
 func (but *BtcUsdtTrader) New(
 	test bool,
 	apiKey, secretKey string,
-	bl, tl, tp, sl, spl float64,
+	bl, tl, tp, sl, spl, muc float64,
 	validCandle uint64,
 	stopHours time.Duration,
 ) error {
@@ -68,7 +71,11 @@ func (but *BtcUsdtTrader) New(
 	if err != nil {
 		return err
 	}
-	but.usdt = usdt
+	if usdt >= but.maxUsableCapital {
+		but.usdt = but.maxUsableCapital
+	} else {
+		but.usdt = usdt
+	}
 	return nil
 }
 
@@ -80,11 +87,11 @@ func (but *BtcUsdtTrader) getFetchParams() map[string]string {
 	return ret
 }
 
-func (but *BtcUsdtTrader) OpportunityFound() (bool, error) {
+func (but *BtcUsdtTrader) OpportunityFound(huntingCh chan struct{}) (bool, error) {
 	params := but.getFetchParams()
 	candlesticks, err := but.binance.KlinesRequest(params)
 	if err != nil {
-		return false, nil
+		return false, err
 	}
 	cCandlesticks := utils.CloseCandlesticks(candlesticks)
 	oCandlesticks := utils.OpenCandlesticks(candlesticks)
@@ -96,6 +103,7 @@ func (but *BtcUsdtTrader) OpportunityFound() (bool, error) {
 	TACandlesticks := utils.CreateTACandlesticks(oCandlesticks, cCandlesticks, hCandlesticks, ema223, ema20, rsi)
 	lastThreeCandles := TACandlesticks[len(TACandlesticks)-3:]
 	but.Trigger(lastThreeCandles)
+	return false, nil
 }
 
 // This method will fetch the current amount of USDT that are in the wallet
@@ -122,13 +130,15 @@ func (but *BtcUsdtTrader) Trigger(lastThreeCandles []models.TACadlestick) {
 		but.monkeyTrigger(lastThreeCandles, but.bottomLimitRSI, but.topLimitRSI) {
 
 		but.triggerFired = true
-		but.BuyTechnique(models.MKY_IVN, models.BEAR, lastThreeCandles[2])
+		but.lastThreeCandles = append(but.lastThreeCandles, lastThreeCandles...)
+		// This should be romved
+		but.BuyTechnique(models.MKY_IVN, models.BEAR)
 	}
 }
 
 // BuyTechnique will perform the buy and will set
-func (but *BtcUsdtTrader) BuyTechnique(strategy models.BuyStrategy, trend models.MarketTrend, lastCandlestick models.TACadlestick) (uint64, error) {
-	params := but.buyParamsSetter(lastCandlestick)
+func (but *BtcUsdtTrader) BuyTechnique(strategy models.BuyStrategy, trend models.MarketTrend) (uint64, error) {
+	params := but.buyParamsSetter(but.lastThreeCandles[2])
 	orderIds, err := but.binance.OrderRequest(params, but.secretKey, but.secretKey, http.MethodPost)
 	if err != nil {
 		return 0, err

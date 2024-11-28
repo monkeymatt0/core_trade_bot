@@ -31,8 +31,9 @@ func main() {
 		config.TakeProfit,
 		config.StopLoss,
 		config.StopPriceLoss,
-		config.ValidCandle, // Candles validity for order
-		stopHoursDuration,  // Hours of stop after a profit/loss stop
+		config.MaxCapitalUsable, // The maxium amount this trader is allowed to used to trade
+		config.ValidCandle,      // Candles validity for order
+		stopHoursDuration,       // Hours of stop after a profit/loss stop
 	)
 
 	huntingCh := make(chan struct{})        // When this channel will receive a signal then a check of the candlestick will take place
@@ -40,12 +41,18 @@ func main() {
 	checkOrderCh := make(chan string)       // This channel will receive the listen key
 	placeSellOrderCh := make(chan struct{}) // When this channel receive a signal, a sell order will be placed
 
-	// @remind : macro area to develop
-	// 1) Hunting (channel) phase - In this phase the trader is looking for opportunity
-	// 2) Place Order (Buy - channel) - During this phase the trader if an opportunity arise place a buy order
-	// 3) Check (channel) the order - During this phase the trader check the order execution and if too much time passes, he will close the order
-	// 4) Place Order (Sell - channel) - During this phase the trader will place the sell order
-	// 5) Check (channel) the order - During this phase the trader will check the order, when it will be executed, start again from 1) Hunting
+	for {
+		select {
+		case <-huntingCh: // In this phase trader is hunting opportunity
+			btcusdtTrader.OpportunityFound(huntingCh)
+		case <-placeBuyOrderCh: // In this phase trader is placing and order
+			btcusdtTrader.BuyTechnique(models.MKY_IVN, models.BEAR)
+		case lk := <-checkOrderCh: // In this phase trader is checking the execution of an order
+			btcusdtTrader.CheckOrder(&lk)
+		case <-placeSellOrderCh: // In this phase the trader placing a sell order
+			btcusdtTrader.SellTechnique()
+		}
+	}
 }
 
 // package main
