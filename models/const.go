@@ -13,3 +13,10 @@ const (
 	BEAR MarketTrend = iota
 	BULL
 )
+
+type Coin string
+
+const (
+	BTC  Coin = "BTC"
+	USDT Coin = "USDT"
+)
